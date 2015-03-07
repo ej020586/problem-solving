@@ -1,0 +1,76 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+    function findNumberOfCoconuts() {
+        var castaways = 10;
+        var keepLooping = true;
+        var coconuts = 10;
+        var max_attempts = 100000;
+
+        while (keepLooping) {
+            var matches = 0;
+            //check to make sure number of coconuts is divisble by the total number of castaways
+            if ((coconuts % castaways) != 0) {
+                console.log("Something went horribly wrong");
+                break;
+            }
+
+            for (var i = castaways; i > 0; i--) {
+                var temp_remainder = (coconuts - 1) % i;
+                if (temp_remainder == (i - 1)) {
+                    matches++;
+                } else {
+                    break;
+                }
+            }
+
+            if (matches == castaways) {
+                keepLooping = false;
+            }
+
+            if (!keepLooping) {
+                $('.answer').html(coconuts-1);
+            } else {
+                coconuts += castaways;
+            }
+
+            //dont let the script timeout
+            if (coconuts > max_attempts) {
+                loop = false;
+            }
+        }
+    }
+
+</script>
+<body>
+<div class="question">
+    <p>
+        Ten people land on a deserted island. There they find lots of coconuts and a monkey. During their first day they
+        gather coconuts and put them all in a community pile. After working all day they decide to sleep and divide them
+        into ten equal piles the next morning.
+    </p>
+    <p>
+        That night one castaway wakes up hungry and decides to take his share early. After dividing up the coconuts he finds he is one coconut short of ten equal piles. He also notices the monkey holding one more coconut. So he tries to
+        take the monkey's coconut to have a total evenly divisible by 10. However when he tries to take it the monkey conks
+        him on the head with it and kills him.
+    </p>
+    <p>
+        Later another castaway wakes up hungry and decides to take his share early. On the way to the coconuts he finds the
+        body of the first castaway, which pleases him because he will now be entitled to 1/9 of the total pile. After
+        dividing them up into nine piles he is again one coconut short and tries to take the monkey's slightly bloodied
+        coconut. The monkey conks the second man on the head and kills him.
+    </p>
+    <p>
+        One by one each of the remaining castaways goes through the same process, until the 10th person to wake up gets the
+        entire pile for himself. What is the smallest number of possible coconuts in the pile, not counting the monkeys?
+    </p>
+</div>
+<div>
+    <button value="Calculate Answer" onclick="findNumberOfCoconuts()">Calculate Answer</button>
+</div>
+<div>Answer :
+    <span class="answer">?</span>
+</div>
+</body>
+</html>
